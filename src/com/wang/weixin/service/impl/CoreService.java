@@ -2,11 +2,15 @@ package com.wang.weixin.service.impl;
 
 import com.wang.weixin.protracted.MessageInfo;
 import com.wang.weixin.protracted.responsemsg.*;
+import com.wang.weixin.service.BaiduMusicComponet;
 import com.wang.weixin.service.ICoreService;
+import com.wang.weixin.service.TuLinCompoment;
 import com.wang.weixin.utils.DWZUtils;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,8 +24,15 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/5/10.
  */
-@Service(value = "coreService")
+@Service("coreService")
 public class CoreService implements ICoreService{
+    @Resource
+    @Qualifier("tulinComponet")
+    private TuLinCompoment talks;
+
+    @Resource
+    @Qualifier("baidumusic")
+    private BaiduMusicComponet baiduMusic;
     /**
      * 处理微信发过来的请求
      * @param request
@@ -187,7 +198,7 @@ public class CoreService implements ICoreService{
                         //获取菜单点击事件的值，做一些事情。。。。。。。
                     } else if (eventKey.equals("21")) {
                         // 搜索音乐
-                        Music music = BaiduMusicService.searchMusic("泡沫", "邓紫棋");
+                        Music music = baiduMusic.searchMusic("泡沫", "邓紫棋");
                         // 音乐消息
                         MusicMessage musicMessage = new MusicMessage();
                         musicMessage.setToUserName(fromUserName);

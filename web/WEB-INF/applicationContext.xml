@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <!--图里机器人配置-->
+    <bean id="tulinComponet" class="com.wang.weixin.service.TuLinCompoment">
+        <constructor-arg name="api_key" value="0f13db91f374efbd5f6a40c62bdd79fa"/>
+        <constructor-arg name="default_talk" value='{"text":"不好意思哦！我没听懂您说什么！"}'/>
+        <constructor-arg name="tulin_url" value="http://www.tuling123.com/openapi/api"/>
+    </bean>
+    <bean id="baidumusic" class="com.wang.weixin.service.BaiduMusicComponet">
+        <constructor-arg name="url"
+                         value="http://box.zhangmen.baidu.com/x?op=12&amp;count=1&amp;title={TITLE}$${AUTHOR}$$$$"/>
+    </bean>
 
 </beans>

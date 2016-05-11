@@ -11,17 +11,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Administrator on 2016/5/10.
+ * Created by Anbang.Wang on 2016/5/10.
  */
 @Controller(value = "weixin")
 public class WeiXinContrl {
     @Resource
-    @Qualifier("coreService")
+    @Qualifier(value = "coreService")
     private ICoreService coreService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public String wxGet(HttpServletRequest request){
+    public String wxGet(HttpServletRequest request) {
         return coreService.processRequest(request);
     }
 }
