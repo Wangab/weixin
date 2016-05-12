@@ -284,5 +284,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="org.springframework.data:spring-data-mongodb:1.9.1.RELEASE" level="project" />
   </component>
 </module>

@@ -42,6 +42,7 @@
           <element id="file-copy" path="$PROJECT_DIR$/lib/xpp3_min-1.1.4c.jar" />
           <element id="library" level="project" name="aopalliance:aopalliance:1.0" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/aopalliance-1.0.jar" />
+          <element id="library" level="project" name="org.springframework.data:spring-data-mongodb:1.9.1.RELEASE" />
         </element>
       </element>
     </root>

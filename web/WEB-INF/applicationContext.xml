@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd ">
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
     <!--图里机器人配置-->
     <bean id="tulinComponet" class="com.wang.weixin.service.TuLinCompoment">
@@ -14,5 +15,29 @@
         <constructor-arg name="url"
                          value="http://box.zhangmen.baidu.com/x?op=12&amp;count=1&amp;title={TITLE}$${AUTHOR}$$$$"/>
     </bean>
-
+    <!-- mysql数据源配置 -->
+    <bean id="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="loginTimeout" value="10000" />
+        <property name="url" value="jdbc:mysql://10.51.92.132:3306/westar?characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"/>
+        <property name="username" value="westar"/>
+        <property name="password" value="3eWYlF1FpDBIE#LYoKQsVjg"/>
+    </bean>
+    <bean id="mysqlJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="mysqlDataSource"/>
+        <property name="lazyInit" value="false"/>
+    </bean>
+    <!-- mongodb数据源配置 -->
+    <!--<mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar" username="" password=""/>-->
+    <mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar" />
+    <!-- mongo模版对象 -->
+    <bean id="mongodbTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongodbFactory"/>
+    </bean>
+    <!-- MongoDB GridFS Template 支持，操作mongodb存放的文件 -->
+    <!--<mongo:mapping-converter id="converter" db-factory-ref="mongodbFactory"/>-->
+    <!--<bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">-->
+        <!--<constructor-arg ref="mongodbFactory"/>-->
+        <!--<constructor-arg ref="converter"/>-->
+    <!--</bean>-->
 </beans>
