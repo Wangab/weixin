@@ -74,10 +74,10 @@ public class UserDAO {
         Map resultMap =  mongoTemplate.findOne(query, Map.class, "ws_user_icon");
         return resultMap == null ? null : resultMap.get("url").toString();
     }
-    public List<String> getUserPotos(String uid){
+    public List<Map> getUserPotos(String uid){
         Query query = new Query(Criteria.where("uid").is(uid));
         query.with(new Sort(Sort.Direction.DESC, "_id")).limit(8);
-        Map resultMap =  mongoTemplate.find(query, ArrayList<Map>.getClass(), "ws_user_icon");
-        return resultMap == null ? null : resultMap.get("url");
+        List<Map> resultMap =  mongoTemplate.find(query, Map.class, "ws_user_icon");
+        return resultMap;
     }
 }
