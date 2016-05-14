@@ -6,7 +6,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -63,9 +62,22 @@ public class UserDAO {
             }
         });
     }
+
+    /**
+     * 根觉uid查找用户头像
+     * @param uid
+     * @return
+     */
     public String getUserIconURL(String uid){
         Query query = new Query(Criteria.where("uid").is(uid));
-        query.with(new Sort(Sort.Direction.DESC, "_id"));
-        mongoTemplate.findOne(query, Map.class, "");
+        query.with(new Sort(Sort.Direction.DESC, "_id")).limit(1);
+        Map resultMap =  mongoTemplate.findOne(query, Map.class, "ws_user_icon");
+        return resultMap == null ? null : resultMap.get("url").toString();
+    }
+    public List<String> getUserPotos(String uid){
+        Query query = new Query(Criteria.where("uid").is(uid));
+        query.with(new Sort(Sort.Direction.DESC, "_id")).limit(8);
+        Map resultMap =  mongoTemplate.find(query, ArrayList<Map>.getClass(), "ws_user_icon");
+        return resultMap == null ? null : resultMap.get("url");
     }
 }
