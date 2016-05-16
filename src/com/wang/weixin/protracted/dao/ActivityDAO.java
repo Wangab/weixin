@@ -1,6 +1,5 @@
 package com.wang.weixin.protracted.dao;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,10 +11,9 @@ import javax.annotation.Resource;
  */
 @Repository("activityDAO")
 public class ActivityDAO {
-    @Resource
-    @Qualifier("mysqlJdbcTemplate")
+    @Resource(name = "mysqlJdbcTemplate")
     private JdbcTemplate mysqlTemplate;
-    @Resource
-    @Qualifier("mongodbTemplate")
+    @Resource(name = "mongodbTemplate")
     private MongoTemplate mongoTemplate;
+
 }

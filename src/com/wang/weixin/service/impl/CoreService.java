@@ -1,6 +1,8 @@
 package com.wang.weixin.service.impl;
 
 import com.wang.weixin.protracted.MessageInfo;
+import com.wang.weixin.protracted.dao.ActivityDAO;
+import com.wang.weixin.protracted.dao.UserDAO;
 import com.wang.weixin.protracted.responsemsg.*;
 import com.wang.weixin.service.BaiduMusicComponet;
 import com.wang.weixin.service.ICoreService;
@@ -12,10 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +31,14 @@ public class CoreService implements ICoreService{
     @Resource
     @Qualifier("baidumusic")
     private BaiduMusicComponet baiduMusic;
+
+    @Resource
+    @Qualifier("userDAO")
+    private UserDAO userDAO;
+
+    @Resource
+    @Qualifier("activityDAO")
+    private ActivityDAO activityDAO;
     /**
      * 处理微信发过来的请求
      * @param request
@@ -78,21 +84,14 @@ public class CoreService implements ICoreService{
                 if(contents.startsWith("@")){
                     if(contents.substring(1) !=null ||"".equals(contents.substring(1).trim())){
                         DWZUtils dwzUtils = new DWZUtils();
-                        try {
-                            Class.forName("com.mysql.jdbc.Driver");
-                            Connection conn = DriverManager.getConnection("jdbc:mysql://10.51.92.132:3306/westar?characterEncoding=UTF-8&amp;amp;autoReconnect=true&amp;amp;failOverReadOnly=false","westar","3eWYlF1FpDBIE#LYoKQsVjg");
-                            PreparedStatement preparedStatement = conn.prepareStatement("SELECT uid,nick,photo FROM t_user where name=? or nick=? or communication=?");
-                            preparedStatement.setString(1, contents.substring(1));
-                            preparedStatement.setString(2, contents.substring(1));
-                            preparedStatement.setString(3, contents.substring(1));
-                            ResultSet rst = preparedStatement.executeQuery();
-                            while (rst.next()) {
-                                String uid = rst.getString("uid");
-                                String nick = rst.getString("nick");
-                                String photo = rst.getString("photo");
-                                String picUrl = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.54/westar-api-service" + photo);
+                        List<Map<String, Object>> userMaps = userDAO.getUserInfo(contents.substring(1));
+                        if (userMaps.size() > 0 ){
+                            for (Map<String, Object> userMap:userMaps){
+                                String uid = userMap.get("uid").toString();
+                                String nick = userMap.get("nick").toString();
+                                String picUrl = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", userDAO.getUserIconURL(uid));
                                 String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.54/westar-api-service/show.action?uid="+uid);
-                                System.out.println(uid + "\t" + nick + "\t" + photo + "\t" + picUrl + "\t" + url);
+                                System.out.println(uid + "\t" + nick + "\t" + picUrl + "\t" + url);
 
                                 Article article1 = new Article();
                                 article1.setTitle(nick + "的主页");
@@ -101,25 +100,10 @@ public class CoreService implements ICoreService{
                                 article1.setUrl(url);
                                 articleList.add(article1);
                             }
-                            rst.close();
-                            preparedStatement.close();
-                            conn.close();
-                            if(articleList.size()>0){
-                                NewsMessage newsMessage = new NewsMessage();
-                                newsMessage.setMsgType(MessageInfo.RESP_MESSAGE_TYPE_NEWS);
-                                newsMessage.setToUserName(fromUserName);
-                                newsMessage.setFromUserName(toUserName);
-                                newsMessage.setCreateTime(new Date().getTime());
-                                newsMessage.setArticleCount(articleList.size());
-                                newsMessage.setArticles(articleList);
-                                return MessageInfo.newsMessageToXml(newsMessage);
-                            }else{
+                        }else {
                                 JSONObject jsonObject = new JSONObject(talks.talk(contents, fromUserName));
                                 respContent = jsonObject.optString("text");
                             }
-                        } catch (Exception e) {
-                            respContent = "未找到该用户" + e.getMessage();
-                        }
 
                     }else{
                         JSONObject jsonObject = new JSONObject(talks.talk(contents, fromUserName));
@@ -130,7 +114,7 @@ public class CoreService implements ICoreService{
                     article1.setTitle("最新的活动尽在这里");
                     article1.setDescription("我们将展示最新的活动给你");
                     article1.setPicUrl("http://123.57.249.54/westar-api-service/image/active.png");
-                    article1.setUrl("http://123.57.249.54/westar-api-service/actlist.action?page=0&pageSize=1000");
+                    article1.setUrl("http://123.57.249.54/westar-api-service/actlist.action?page=0&pageSize=100");
                     articleList.add(article1);
 
                     NewsMessage newsMessage = new NewsMessage();
@@ -258,4 +242,9 @@ public class CoreService implements ICoreService{
         System.out.println("----- >>>> " + respMessage);
         return respMessage;
     }
+
+    public void setTalks(TuLinCompoment talks) {
+        this.talks = talks;
+    }
+
 }

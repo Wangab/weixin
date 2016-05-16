@@ -43,6 +43,9 @@
           <element id="library" level="project" name="aopalliance:aopalliance:1.0" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/aopalliance-1.0.jar" />
           <element id="library" level="project" name="org.springframework.data:spring-data-mongodb:1.9.1.RELEASE" />
+          <element id="library" level="project" name="jstl:jstl:1.2" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.6" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-connector-java-5.1.6.jar" />
         </element>
       </element>
     </root>

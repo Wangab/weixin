@@ -1,13 +1,8 @@
 package com.wang.weixin.utils;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 根据IP地址获取详细的地域信息
@@ -18,7 +13,7 @@ public class AddressUtils {
     /**
      *
      * @param content 请求的参数 格式为：name=xxx&pwd=xxx
-     * @param encoding 服务器端请求编码。如GBK,UTF-8等
+     * @param encodingString 服务器端请求编码。如GBK,UTF-8等
      * @return
      * @throws UnsupportedEncodingException
      */

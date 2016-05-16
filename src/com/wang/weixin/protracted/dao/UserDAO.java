@@ -1,7 +1,6 @@
 package com.wang.weixin.protracted.dao;
 
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,11 +27,9 @@ import java.util.Map;
 public class UserDAO {
     private String QUERY_SQL = "SELECT uid,nick FROM t_user where name=? or nick=? or communication=?";
 
-    @Resource
-    @Qualifier("mysqlJdbcTemplate")
+    @Resource(name = "mysqlJdbcTemplate")
     private JdbcTemplate mysqlTemplate;
-    @Resource
-    @Qualifier("mongodbTemplate")
+    @Resource(name = "mongodbTemplate")
     private MongoTemplate mongoTemplate;
 
     /**
@@ -80,4 +77,5 @@ public class UserDAO {
         List<Map> resultMap =  mongoTemplate.find(query, Map.class, "ws_user_icon");
         return resultMap;
     }
+
 }
