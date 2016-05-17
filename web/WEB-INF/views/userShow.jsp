@@ -13,9 +13,9 @@
     <link rel="dns-prefetch" href="//res.wx.qq.com">
     <link rel="dns-prefetch" href="//mmbiz.qpic.cn">
     <link rel="shortcut icon" type="image/x-icon" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/favicon22c41b.ico">
-    <link rel="stylesheet" type="text/css" href="css/page_mp_article_improve2a26bd.css">
-    <link rel="stylesheet" type="text/css" href="css/page_mp_article_improve_combo29ab01.css">
-    <link rel="stylesheet" type="text/css" href="css/appmsg/not_in_mm2637ae.css">
+    <link rel="stylesheet" type="text/css" href="/WEB-INF/css/page_mp_article_improve2a26bd.css">
+    <link rel="stylesheet" type="text/css" href="/WEB-INF/css/page_mp_article_improve_combo29ab01.css">
+    <link rel="stylesheet" type="text/css" href="/WEB-INF/css/appmsg/not_in_mm2637ae.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
@@ -78,23 +78,20 @@
                                     style="width: 85px; height: 60px; box-shadow: rgb(120, 120, 120) -1px 3px 8px; padding: 30px 10px 5px; -webkit-transform: rotateZ(-15deg); margin-left: -10px; color: rgb(255, 255, 255); border-color: rgb(240, 200, 213); background-color: rgb(235, 103, 148); box-sizing: border-box;"
                                     data-width="85px">
                                 <p style="color: inherit; white-space: normal;">
-										<span style="font-size: 18px;"><strong
-                                                style="color: inherit;"><span class="autonum"
-                                                                              style="color: inherit;" data-original-title="" title="">WeStar</span>
-                                        </strong> </span>
+										<span style="font-size: 18px;">
+                                            <strong style="color: inherit;">
+                                                <span class="autonum" style="color: inherit;" data-original-title="" title="">WeStar</span>
+                                            </strong>
+                                        </span>
                                 </p>
                             </section>
-                            <section
-                                    style="padding: 0px; border: 0px rgb(235, 103, 148); max-width: 100%; margin-top: -70px; box-sizing: border-box; color: rgb(62, 62, 62); line-height: 25px; word-wrap: break-word !important;">
-                                <section
-                                        style="width: 20px; height: 20px; box-shadow: rgb(120, 120, 120) -1px 3px 8px; -webkit-transform: rotateZ(-45deg); margin-left: 100px; margin-bottom: -5px; color: rgb(255, 255, 255); border-color: rgb(240, 200, 213); background-color: rgb(235, 103, 148); box-sizing: border-box; padding: 0px;"
+                            <section style="padding: 0px; border: 0px rgb(235, 103, 148); max-width: 100%; margin-top: -70px; box-sizing: border-box; color: rgb(62, 62, 62); line-height: 25px; word-wrap: break-word !important;">
+                                <section style="width: 20px; height: 20px; box-shadow: rgb(120, 120, 120) -1px 3px 8px; -webkit-transform: rotateZ(-45deg); margin-left: 100px; margin-bottom: -5px; color: rgb(255, 255, 255); border-color: rgb(240, 200, 213); background-color: rgb(235, 103, 148); box-sizing: border-box; padding: 0px;"
                                         data-width="20px"></section>
                                 <section style="max-width: 100%; box-sizing: border-box; padding: 80px 15px 18px; color: inherit; font-size: 14px; box-shadow: rgb(117, 117, 117) 0px 0px 5px; border: 1px solid rgba(117, 117, 117, 0.498039); margin: 0px;">
-                                    <p
-                                            style="line-height: 24px; box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-align: right; color: inherit; white-space: normal;">
-                                        <strong style="color: inherit;"><span
-                                                class="135brush" data-brushtype="text"
-                                                style="color: rgb(235, 103, 148); font-size: 28px; text-align: justify; border-color: rgb(235, 103, 148);"><s:property value='user.nick'/></span>
+                                    <p style="line-height: 24px; box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-align: right; color: inherit; white-space: normal;">
+                                        <strong style="color: inherit;">
+                                            <span class="135brush" data-brushtype="text" style="color: rgb(235, 103, 148); font-size: 28px; text-align: justify; border-color: rgb(235, 103, 148);"><s:property value='user.nick'/></span>
                                         </strong>
                                     </p>
                                     <section class="135brush"

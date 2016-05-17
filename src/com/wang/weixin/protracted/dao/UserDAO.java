@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Repository("userDAO")
 public class UserDAO {
-    private String QUERY_SQL = "SELECT uid,nick FROM t_user where name=? or nick=? or communication=?";
+    private String QUERY_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust FROM t_user where name=? or nick=? or communication=?";
 
     @Resource(name = "mysqlJdbcTemplate")
     private JdbcTemplate mysqlTemplate;
@@ -53,6 +53,13 @@ public class UserDAO {
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("uid", resultSet.getString("uid"));
                     map.put("nick", resultSet.getString("nick"));
+                    map.put("name",resultSet.getString("name"));
+                    map.put("sex", resultSet.getString("sex"));
+                    map.put("height", resultSet.getString("height"));
+                    map.put("weight", resultSet.getString("weight"));
+                    map.put("hips", resultSet.getString("hips"));
+                    map.put("waist", resultSet.getString("waist"));
+                    map.put("bust", resultSet.getString("bust"));
                     results.add(map);
                 }
                 return results;
