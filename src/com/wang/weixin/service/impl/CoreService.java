@@ -84,13 +84,13 @@ public class CoreService implements ICoreService{
                 if(contents.startsWith("@")){
                     if(contents.substring(1) !=null ||"".equals(contents.substring(1).trim())){
                         DWZUtils dwzUtils = new DWZUtils();
-                        List<Map<String, Object>> userMaps = userDAO.getUserInfo(contents.substring(1));
+                        List<Map<String, Object>> userMaps = userDAO.getUserInfoList(contents.substring(1));
                         if (userMaps.size() > 0 ){
                             for (Map<String, Object> userMap:userMaps){
                                 String uid = userMap.get("uid").toString();
                                 String nick = userMap.get("nick").toString();
                                 String picUrl = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", userDAO.getUserIconURL(uid));
-                                String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.54/westar-api-service/show.action?uid="+uid);
+                                String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.54/weixin/wx/show?uid="+uid);
                                 System.out.println(uid + "\t" + nick + "\t" + picUrl + "\t" + url);
 
                                 Article article1 = new Article();

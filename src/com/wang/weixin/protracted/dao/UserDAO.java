@@ -25,19 +25,28 @@ import java.util.Map;
  */
 @Repository("userDAO")
 public class UserDAO {
-    private String QUERY_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust FROM t_user where name=? or nick=? or communication=?";
+    private String QUERY_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust,haunted,shoes_size FROM t_user where name=? or nick=? or communication=?";
+    private String QUERY_SINGLE_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust,haunted,shoes_size FROM t_user where uid=?";
 
     @Resource(name = "mysqlJdbcTemplate")
     private JdbcTemplate mysqlTemplate;
     @Resource(name = "mongodbTemplate")
     private MongoTemplate mongoTemplate;
 
+    public Map<String, Object> getUserInfo(String uid){
+        try{
+            return mysqlTemplate.queryForMap(QUERY_SINGLE_SQL, uid);
+        }catch (DataAccessException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * 获取用户信息组成map返回
      * @param searchStr 匹配条件的搜索字段，他将与昵称、用户名、联系方式匹配来试图搜索用户信息
      * @return
      */
-    public List<Map<String, Object>> getUserInfo(String searchStr){
+    public List<Map<String, Object>> getUserInfoList(String searchStr){
         return mysqlTemplate.query(QUERY_SQL, new PreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement) throws SQLException {
@@ -60,6 +69,8 @@ public class UserDAO {
                     map.put("hips", resultSet.getString("hips"));
                     map.put("waist", resultSet.getString("waist"));
                     map.put("bust", resultSet.getString("bust"));
+                    map.put("haunted", resultSet.getString("haunted"));
+                    map.put("shoes_size", resultSet.getString("shoes_size"));
                     results.add(map);
                 }
                 return results;

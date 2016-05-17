@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Nonnull;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Anbang.Wang on 2016/5/10.
@@ -62,9 +65,19 @@ public class WeiXinContrl {
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     public ModelAndView hashCode(@RequestParam(required=false, name = "uid") @Nonnull String uid) {
         ModelAndView model = new ModelAndView();
+        Map<String, Object> map = userDAO.getUserInfo(uid);
+        if(map != null){
+            String iconUrl = userDAO.getUserIconURL(map.get("uid").toString());
+            List<Map> photos = userDAO.getUserPotos(map.get("uid").toString());
+            List<String> photoUrls = new ArrayList<>();
+            for (Map photo : photos){
+                photoUrls.add(photo.get("url").toString());
+            }
+            map.put("phourl", photoUrls);
+            map.put("icon", iconUrl);
+        }
+        model.addAllObjects(map);
         model.addObject("num", num++);
-        model.addObject("uid", uid);
-
         model.setViewName("userShow");
         return model;
     }
