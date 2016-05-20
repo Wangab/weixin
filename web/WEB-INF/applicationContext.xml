@@ -31,7 +31,8 @@
     </bean>
     <!-- mongodb数据源配置 -->
     <!--<mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar" username="" password=""/>-->
-    <mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar" />
+    <!--<mongo:db-factory id="mongodbFactory" host="10.51.92.132" port="27017" dbname="westar" />-->
+    <mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar"/>
     <!-- mongo模版对象 -->
     <bean id="mongodbTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongodbFactory"/>

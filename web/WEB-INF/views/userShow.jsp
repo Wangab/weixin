@@ -88,7 +88,7 @@
                                             style="line-height: 24px; box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-align: right; color: inherit; white-space: normal;">
                                         <strong style="color: inherit;"><span
                                                 class="135brush" data-brushtype="text"
-                                                style="color: rgb(235, 103, 148); font-size: 28px; text-align: justify; border-color: rgb(235, 103, 148);">安楠</span>
+                                                style="color: rgb(235, 103, 148); font-size: 28px; text-align: justify; border-color: rgb(235, 103, 148);">${nick}</span>
                                         </strong>
                                     </p>
                                     <section class="135brush"
