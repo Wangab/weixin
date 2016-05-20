@@ -4,7 +4,9 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.springframework.stereotype.Component;
 
+@Component("dwzUtils")
 public class DWZUtils {
 	HttpClient httpClient = new HttpClient();
 

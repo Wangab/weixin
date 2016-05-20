@@ -10,7 +10,6 @@ import com.wang.weixin.service.TuLinCompoment;
 import com.wang.weixin.utils.DWZUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,6 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/5/10.
  */
-@Service("coreService")
 public class CoreService implements ICoreService{
     @Resource
     @Qualifier("tulinComponet")
@@ -39,6 +37,17 @@ public class CoreService implements ICoreService{
     @Resource
     @Qualifier("activityDAO")
     private ActivityDAO activityDAO;
+
+    @Resource
+    @Qualifier("dwzUtils")
+    DWZUtils dwzUtils;
+
+    List<String> words;
+
+    public CoreService(List<String> words) {
+        this.words = words;
+    }
+
     /**
      * 处理微信发过来的请求
      * @param request
@@ -46,12 +55,6 @@ public class CoreService implements ICoreService{
      */
     @Override
     public String processRequest(HttpServletRequest request) {
-        List<String> words = new ArrayList<String>();
-        words.add("#活动");
-        words.add("活动");
-        words.add("礼仪");
-        words.add("礼仪活动");
-
         String respMessage = null;
         try {
             // 默认返回的文本消息内容
@@ -83,14 +86,14 @@ public class CoreService implements ICoreService{
                 System.out.println();
                 if(contents.startsWith("@")){
                     if(contents.substring(1) !=null ||"".equals(contents.substring(1).trim())){
-                        DWZUtils dwzUtils = new DWZUtils();
+
                         List<Map<String, Object>> userMaps = userDAO.getUserInfoList(contents.substring(1));
                         if (userMaps.size() > 0 ){
                             for (Map<String, Object> userMap:userMaps){
                                 String uid = userMap.get("uid").toString();
                                 String nick = userMap.get("nick").toString();
                                 String picUrl = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", userDAO.getUserIconURL(uid));
-                                String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.54/weixin/wx/show?uid="+uid);
+                                String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.68/weixin/wx/show?uid="+uid);
                                 System.out.println(uid + "\t" + nick + "\t" + picUrl + "\t" + url);
 
                                 Article article1 = new Article();
@@ -100,6 +103,14 @@ public class CoreService implements ICoreService{
                                 article1.setUrl(url);
                                 articleList.add(article1);
                             }
+                            NewsMessage newsMessage = new NewsMessage();
+                            newsMessage.setMsgType(MessageInfo.RESP_MESSAGE_TYPE_NEWS);
+                            newsMessage.setToUserName(fromUserName);
+                            newsMessage.setFromUserName(toUserName);
+                            newsMessage.setCreateTime(new Date().getTime());
+                            newsMessage.setArticleCount(articleList.size());
+                            newsMessage.setArticles(articleList);
+                            return MessageInfo.newsMessageToXml(newsMessage);
                         }else {
                                 JSONObject jsonObject = new JSONObject(talks.talk(contents, fromUserName));
                                 respContent = jsonObject.optString("text");
