@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Repository("userDAO")
 public class UserDAO {
-    private String QUERY_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust,haunted,shoes_size FROM t_user where name=? or nick=? or communication=?";
+    private String QUERY_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust,haunted,shoes_size FROM t_user where name=? or nick=? or communication=? or phone=?";
     private String QUERY_SINGLE_SQL = "SELECT uid,nick,name,sex,height,weight,hips,waist,bust,haunted,shoes_size FROM t_user where uid=?";
 
     @Resource(name = "mysqlJdbcTemplate")
@@ -53,6 +53,7 @@ public class UserDAO {
                 preparedStatement.setString(1, searchStr);
                 preparedStatement.setString(2, searchStr);
                 preparedStatement.setString(3, searchStr);
+                preparedStatement.setString(4, searchStr);
             }
         }, new ResultSetExtractor<List<Map<String, Object>>>() {
             @Override

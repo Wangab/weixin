@@ -85,7 +85,7 @@ public class CoreService implements ICoreService{
                 String contents = requestMap.get("Content");
                 System.out.println();
                 if(contents.startsWith("@")){
-                    if(contents.substring(1) !=null ||"".equals(contents.substring(1).trim())){
+                    if(contents.substring(1) !=null || !"".equals(contents.substring(1).trim())){
 
                         List<Map<String, Object>> userMaps = userDAO.getUserInfoList(contents.substring(1));
                         if (userMaps.size() > 0 ){
