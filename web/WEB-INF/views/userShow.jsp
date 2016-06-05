@@ -112,11 +112,13 @@
                                 style="width: 0px; height: 0px; clear: both; box-sizing: border-box; padding: 0px; margin: 0px;"></section>
                     </section>
 
-
-                    <c:if test="${icon != null}">
-                        <img data-s="300,640" data-type="jpeg" style="max-height: 800px !important;margin-top: 8px;"
-                             data-ratio="1.5" data-w="" src="${icon}"><br>
+                    <c:if test="${phourl == null}">
+                        <c:if test="${icon != null}">
+                            <img data-s="300,640" data-type="jpeg" style="max-height: 800px !important;margin-top: 8px;"
+                                 data-ratio="1.5" data-w="" src="${icon}"><br>
+                        </c:if>
                     </c:if>
+
                     <c:if test="${phourl != null}">
                         <c:forEach items="${phourl}" var="pho">
                             <img data-s="300,640" data-type="jpeg" style="max-height: 800px !important;margin-top: 8px;" data-ratio="1.5" data-w="" src="${pho}"><br>
