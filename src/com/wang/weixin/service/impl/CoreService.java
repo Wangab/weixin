@@ -93,7 +93,7 @@ public class CoreService implements ICoreService{
                                 String uid = userMap.get("uid").toString();
                                 String nick = userMap.get("nick").toString();
                                 String picUrl = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", userDAO.getUserIconURL(uid));
-                                String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://123.57.249.68/weixin/wx/show?uid="+uid);
+                                String url = dwzUtils.mkURL("http://api.t.sina.com.cn/short_url/shorten.json", "http://*.*.*.*/weixin/wx/show?uid="+uid);
                                 System.out.println(uid + "\t" + nick + "\t" + picUrl + "\t" + url);
 
                                 Article article1 = new Article();
