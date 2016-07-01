@@ -5,6 +5,7 @@ package com.wang.test;
  */
 public class Test {
     public static void main(String[] args) {
+
         String contents = "@活动";
         System.out.println();
         if(contents.startsWith("@")){

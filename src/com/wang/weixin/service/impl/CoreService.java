@@ -124,8 +124,8 @@ public class CoreService implements ICoreService{
                     Article article1 = new Article();
                     article1.setTitle("最新的活动尽在这里");
                     article1.setDescription("我们将展示最新的活动给你");
-                    article1.setPicUrl("http://123.57.249.68/M00/00/01/CjNWhFdAQCSAGKC5AAMCmLKKuAk346.png");
-                    article1.setUrl("http://123.57.249.54/westar-api-service/actlist.action?page=0&pageSize=100");
+                    article1.setPicUrl("http://*.*.*.*/M00/00/01/CjNWhFdAQCSAGKC5AAMCmLKKuAk346.png");
+                    article1.setUrl("http://*.*.*.*/westar-api-service/actlist.action?page=0&pageSize=100");
                     articleList.add(article1);
 
                     NewsMessage newsMessage = new NewsMessage();

@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class SignInfo {
 	// 与接口配置信息中的Token要一致
-	private static String token = "wangabweixin";
+	private static String token = "*.*.*.*";
 
 	/**
 	 * 验证签名

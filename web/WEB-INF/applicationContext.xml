@@ -17,9 +17,6 @@
     <!-- mysql数据源配置 -->
     <bean id="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/westar?characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"/>-->
-        <!--<property name="username" value="root"/>-->
-        <!--<property name="password" value="root"/>-->
         <property name="url" value="jdbc:mysql://10.51.92.132:3306/westar_test?characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"/>
         <property name="username" value="westar"/>
         <property name="password" value="3eWYlF1FpDBIE#LYoKQsVjg"/>
@@ -31,7 +28,6 @@
     <!-- mongodb数据源配置 -->
     <!--<mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar" username="" password=""/>-->
     <mongo:db-factory id="mongodbFactory" host="10.51.92.132" port="27017" dbname="westar" />
-    <!--<mongo:db-factory id="mongodbFactory" host="127.0.0.1" port="27017" dbname="westar"/>-->
     <!-- mongo模版对象 -->
     <bean id="mongodbTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongodbFactory"/>
